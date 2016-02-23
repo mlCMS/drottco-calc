@@ -1,0 +1,86 @@
+<div id="calc-box">
+  <table class="calc-container">
+    <tr id="titles">
+      <th>Area i m<sup>2</sup></th>
+      <th>Hur ofta?</th>
+    </tr>
+    <!--titles-->
+
+    <tr id="inputs">
+      <td>
+        <input id="area" type="number" name="area" placeholder="area" oninput="Calculate()">
+      </td>
+      <td>
+        <select id="frequency" onchange="Calculate()">
+          <option value="8">2 gånger i veckan</option>
+          <option value="4">1 gång i veckan</option>
+          <option value="2">2 gånger i månaden</option>
+          <option value="1">1 gång i månaden</option>
+        </select>
+      </td>
+    </tr>
+    <!--inputs-->
+
+    <tr id="button">
+      <th colspan="2">
+        <button onclick="Calculate()">Beräkna</button>
+      </th>
+    </tr>
+
+    <tr id="g-p">
+      <th colspan="2">
+        <p class="result-text">Grund pris:
+          <span id="grund-p">20</span> <!--OBS! endast siffror i span--> kr.
+        </p>
+      </th>
+    </tr>
+
+    <tr id="p-p-a">
+      <th colspan="2">
+        <p class="result-text">Pris per area:
+          <span id="p-per-area">4</span> <!--OBS! endast siffror i span-->  kr/a.
+        </p>
+      </th>
+    </tr>
+    <!--base-->
+
+    <tr id="results">
+      <th colspan="2">
+        <p class="result-text" id="the-results"></p>
+      </th>
+    </tr>
+    <!--results-->
+  </table>
+  <!--calc-container-->
+</div>
+<!-- end calc-box-->
+<script>
+var round = Math.round;
+  function Calculate() {
+    var a = document.getElementById("area").value; //area
+    var f = document.getElementById("frequency").value; //frekvens
+    var g = document.getElementById("grund-p").innerHTML; //grundpris
+    var p = document.getElementById("p-per-area").innerHTML; //pris per area
+console.log(a + f + g + p);
+    var a = round(a);
+    var f = round(f);
+    var g = round(g);
+    var p = round(p * 4);
+console.log('Area: ' + a);
+console.log('Frekvens: ' + f);
+console.log('Grundpris: ' + g);
+console.log('Pris per area: ' + p);
+    var ekv = g + p * a * f; //ekvationen
+    var r = ekv; //resultat
+
+    if (a) { //kontrollera att en area har skrivits in
+      document.getElementById("the-results").style.color = ""
+      document.getElementById("the-results").innerHTML = "Kostnaden är: " + r + " Sek.";
+    } else {
+      document.getElementById("the-results").style.color = "red"
+      document.getElementById("the-results").innerHTML = "Hur stor area?";
+    }
+
+  }
+
+</script>
